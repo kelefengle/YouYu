@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">有鱼</string>
+
+    <string name="share_err_ok">分享成功</string>
+    <string name="share_err_comm">分享出错</string>
+    <string name="share_err_user_cancel">取消分享</string>
+    <string name="share_err_sent_failed">发送失败</string>
+    <string name="share_err_auth_denied">认证失败</string>
+    <string name="share_err_unsupport">不支持</string>
+    <string name="share_err_unknow">未知错误</string>
+
+    <string name="action_we_chat_login">微信登录</string>
+    <string name="action_we_chat_share">微信分享</string>
+    <string name="action_we_chat_pay">微信支付</string>
+    <string name="action_nothing">nothing</string>
+    <string name="title_activity_base_aty">BaseAty</string>
+</resources>
