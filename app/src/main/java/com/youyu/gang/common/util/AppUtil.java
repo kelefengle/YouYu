@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -56,6 +57,10 @@ public class AppUtil {
         BigDecimal screenBD = new BigDecimal(Double.toString(screenWidth));
         BigDecimal picBD = new BigDecimal(Double.toString(picWidth));
         return screenBD.divide(picBD, retainValue, BigDecimal.ROUND_HALF_UP).doubleValue();
+    }
+
+    public static int dpToPx(Context context, int dp){
+        return (int)(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.getResources().getDisplayMetrics()) + 0.5f);
     }
 
 }

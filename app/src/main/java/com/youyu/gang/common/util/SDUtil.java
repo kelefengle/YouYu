@@ -27,7 +27,7 @@ public class SDUtil {
 
     static String ROOT_PATH;
 
-    static String APP_DIR_NAME = "JinXiang";
+    static String APP_DIR_NAME = "YouYu";
     static String APP_DIR_PATH;
 
     static String VIDEO_DIR_NAME = "video";
