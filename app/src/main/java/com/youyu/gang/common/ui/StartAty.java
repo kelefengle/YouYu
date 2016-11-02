@@ -1,6 +1,7 @@
 package com.youyu.gang.common.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -12,5 +13,6 @@ public class StartAty extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_aty);
+        startActivity(new Intent(this,YouYuAty.class));
     }
 }
