@@ -5,28 +5,27 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
 import com.youyu.gang.R;
+import com.youyu.gang.common.adapter.HomeFragmentPageAdp;
 import com.youyu.gang.community.ui.CommunityFra;
 import com.youyu.gang.find.ui.FindFra;
 import com.youyu.gang.message.ui.MessageFra;
 import com.youyu.gang.user.ui.UserFra;
 
-public class YouYuAty extends FragmentActivity {
+public class YouYuAty extends FragmentActivity implements ViewPager.OnPageChangeListener, View.OnClickListener {
 
     private TextView community;
     private TextView find;
     private TextView message;
     private TextView user;
-    private View frameLayout;
-    private CommunityFra communityFra;
-    private FindFra findFra;
-    private MessageFra messageFra;
-    private UserFra userFra;
+    private ViewPager homeViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +33,7 @@ public class YouYuAty extends FragmentActivity {
         setContentView(R.layout.activity_you_yu_aty);
         findViews();
         init();
+        setListener();
     }
 
     void findViews(){
@@ -41,65 +41,97 @@ public class YouYuAty extends FragmentActivity {
         find = ((TextView) findViewById(R.id.find));
         message = ((TextView) findViewById(R.id.message));
         user = ((TextView) findViewById(R.id.user));
-        frameLayout = findViewById(R.id.frameLayout);
+        homeViewPager = ((ViewPager) findViewById(R.id.homeViewPager));
     }
 
     void init(){
         community.setTextColor(getResources().getColor(R.color.textColorSelected));
-        initCommunityFra();
-
+        FragmentManager supportFragmentManager = getSupportFragmentManager();
+        homeViewPager.setAdapter(new HomeFragmentPageAdp(supportFragmentManager));
     }
 
-    void initCommunityFra(){
-        if (communityFra==null){
-            communityFra = new CommunityFra();
-        }
-        updateFragment(communityFra);
+    void setListener(){
+        homeViewPager.addOnPageChangeListener(this);
+        community.setOnClickListener(this);
+        find.setOnClickListener(this);
+        message.setOnClickListener(this);
+        user.setOnClickListener(this);
     }
 
-    void initFindFra(){
-        if (findFra==null){
-            findFra = new FindFra();
-        }
-        updateFragment(findFra);
-    }
-
-    void initMessageFra(){
-        if (messageFra==null){
-            messageFra = new MessageFra();
-        }
-        updateFragment(messageFra);
-    }
-
-    void initUserFra(){
-        if (userFra==null){
-            userFra = new UserFra();
-        }
-        updateFragment(userFra);
-    }
 
     public void onClick(View view){
         switch (view.getId()){
             case R.id.community:
-                initCommunityFra();
+                homeViewPager.setCurrentItem(0);
+                selectCommunity();
                 break;
             case R.id.find:
-                initFindFra();
+                homeViewPager.setCurrentItem(1);
+                selectFind();
                 break;
             case R.id.message:
-                initMessageFra();
+                homeViewPager.setCurrentItem(2);
+               selectMessage();
                 break;
             case R.id.user:
-                initUserFra();
+                homeViewPager.setCurrentItem(3);
+               selectUser();
                 break;
         }
     }
 
-    public void updateFragment(Fragment fragment){
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.frameLayout,fragment)
-                .commit();
+    void selectCommunity(){
+        community.setTextColor(getResources().getColor(R.color.textColorSelected));
+        find.setTextColor(getResources().getColor(R.color.textColorSelect));
+        message.setTextColor(getResources().getColor(R.color.textColorSelect));
+        user.setTextColor(getResources().getColor(R.color.textColorSelect));
+    }
+    void selectFind(){
+        community.setTextColor(getResources().getColor(R.color.textColorSelect));
+        find.setTextColor(getResources().getColor(R.color.textColorSelected));
+        message.setTextColor(getResources().getColor(R.color.textColorSelect));
+        user.setTextColor(getResources().getColor(R.color.textColorSelect));
+    }
+    void selectMessage(){
+        community.setTextColor(getResources().getColor(R.color.textColorSelect));
+        find.setTextColor(getResources().getColor(R.color.textColorSelect));
+        message.setTextColor(getResources().getColor(R.color.textColorSelected));
+        user.setTextColor(getResources().getColor(R.color.textColorSelect));
+    }
+    void selectUser(){
+        community.setTextColor(getResources().getColor(R.color.textColorSelect));
+        find.setTextColor(getResources().getColor(R.color.textColorSelect));
+        message.setTextColor(getResources().getColor(R.color.textColorSelect));
+        user.setTextColor(getResources().getColor(R.color.textColorSelected));
     }
 
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        switch (position){
+            case 0:
+                selectCommunity();
+                break;
+            case 1:
+                selectFind();
+                break;
+            case 2:
+                selectMessage();
+                break;
+            case 3:
+                selectUser();
+                break;
+
+        }
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
 }
