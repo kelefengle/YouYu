@@ -15,39 +15,47 @@
             android:orientation="horizontal"
             >
             <TextView
+                android:id="@+id/recommend"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="@string/recommend"
                 android:gravity="center"
+                android:textSize="@dimen/textsize16"
                 />
             <TextView
+                android:id="@+id/newest"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="@string/newest"
                 android:gravity="center"
+                android:textSize="@dimen/textsize16"
                 />
             <TextView
+                android:id="@+id/follow"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="@string/follow"
                 android:gravity="center"
+                android:textSize="@dimen/textsize16"
                 />
             <TextView
+                android:id="@+id/news_flash"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="@string/news_flash"
                 android:gravity="center"
+                android:textSize="@dimen/textsize16"
                 />
         </LinearLayout>
 
         <View
             android:id="@+id/bar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="2dp"
             android:background="@color/colorPrimaryDark"
             android:layout_marginTop="10dp"
             />

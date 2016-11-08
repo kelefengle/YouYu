@@ -62,5 +62,9 @@ public class AppUtil {
     public static int dpToPx(Context context, int dp){
         return (int)(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.getResources().getDisplayMetrics()) + 0.5f);
     }
+    public static int spTopx(Context context, float spValue) {
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * fontScale + 0.5f);
+    }
 
 }
