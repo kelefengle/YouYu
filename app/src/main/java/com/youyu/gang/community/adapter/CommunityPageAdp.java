@@ -14,21 +14,31 @@ import com.youyu.gang.community.ui.CommunityRecommendFra;
  */
 public class CommunityPageAdp extends FragmentPagerAdapter {
 
-    public CommunityPageAdp(FragmentManager fm) {
+    Fragment fragment;
+    public CommunityPageAdp(FragmentManager fm,Fragment fragment) {
         super(fm);
+        this.fragment=fragment;
     }
 
     @Override
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return new CommunityRecommendFra();
+                CommunityRecommendFra communityRecommendFra = new CommunityRecommendFra();
+                communityRecommendFra.setTargetFragment(fragment,1);
+                return communityRecommendFra;
             case 1:
-                return new CommunityNewestFra();
+                CommunityNewestFra communityNewestFra = new CommunityNewestFra();
+                communityNewestFra.setTargetFragment(fragment,1);
+                return communityNewestFra;
             case 2:
-                return new CommunityFollowFra();
+                CommunityFollowFra communityFollowFra = new CommunityFollowFra();
+                communityFollowFra.setTargetFragment(fragment,1);
+                return communityFollowFra;
             case 3:
-                return new CommunityNewsFlashFra();
+                CommunityNewsFlashFra communityNewsFlashFra = new CommunityNewsFlashFra();
+                communityNewsFlashFra.setTargetFragment(fragment,1);
+                return communityNewsFlashFra;
             default:
                 return new CommunityRecommendFra();
         }

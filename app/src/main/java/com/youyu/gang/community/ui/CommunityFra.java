@@ -1,23 +1,29 @@
 package com.youyu.gang.community.ui;
 
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.youyu.gang.R;
-import com.youyu.gang.common.ui.YouYuAty;
 import com.youyu.gang.common.util.AppUtil;
 import com.youyu.gang.community.adapter.CommunityPageAdp;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +41,8 @@ public class CommunityFra extends Fragment implements ViewPager.OnPageChangeList
     private TextView newest;
     private TextView follow;
     private int initMarging;
+    private View headView;
+    float initViewY=0;
 
     public CommunityFra() {
         // Required empty public constructor
@@ -57,6 +65,7 @@ public class CommunityFra extends Fragment implements ViewPager.OnPageChangeList
         newest = ((TextView) view.findViewById(R.id.newest));
         follow = ((TextView) view.findViewById(R.id.follow));
         news_flash = ((TextView) view.findViewById(R.id.news_flash));
+        headView = view.findViewById(R.id.headView);
         return view;
     }
 
@@ -64,7 +73,7 @@ public class CommunityFra extends Fragment implements ViewPager.OnPageChangeList
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewPager.addOnPageChangeListener(this);
-        viewPager.setAdapter(new CommunityPageAdp(getChildFragmentManager()));
+        viewPager.setAdapter(new CommunityPageAdp(getChildFragmentManager(),this));
         initTabLineWidth();
     }
 
@@ -121,8 +130,28 @@ public class CommunityFra extends Fragment implements ViewPager.OnPageChangeList
                 .getLayoutParams();
         lp.width = AppUtil.spTopx(context,32)+10;
         lp.height=AppUtil.dpToPx(context,2);
-        initMarging = screenWidth/8-AppUtil.spTopx(context,16)-3;
+        initMarging = screenWidth/8-AppUtil.spTopx(context,16)-2;
         lp.leftMargin=initMarging;
         bar.setLayoutParams(lp);
     }
+
+    public void visibleHeader(){
+        if (headView.getY()>-headView.getMeasuredHeight()){
+            return;
+        }
+        ObjectAnimator animator=ObjectAnimator.ofFloat(headView,"translationY",-headView.getMeasuredHeight()-initViewY,initViewY);
+        animator.setDuration(1000);
+        animator.start();
+
+    }
+    public void invisibleHeader(){
+        if (headView.getY()<0){
+            return;
+        }
+        initViewY=headView.getY();
+        ObjectAnimator animator=ObjectAnimator.ofFloat(headView,"translationY",headView.getPivotY(),-headView.getMeasuredHeight()-initViewY);
+        animator.setDuration(1000);
+        animator.start();
+    }
+
 }
